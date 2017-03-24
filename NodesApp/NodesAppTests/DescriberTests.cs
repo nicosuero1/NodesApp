@@ -5,6 +5,9 @@ using System;
 
 namespace NodesAppTests
 {
+    /// <summary>
+    /// Implement test methods for Describer Class
+    /// </summary>
     [TestClass]
     public class DescriberTests
     {
@@ -37,7 +40,7 @@ namespace NodesAppTests
             var result = implementation.Describe(testData);
             string expected = "new TwoChildrenNode(\"twochildren\","
                 + Environment.NewLine
-                + "    new NoChildrenNode(\"child1\")"
+                + "    new NoChildrenNode(\"child1\"),"
                 + Environment.NewLine
                 + "    new NoChildrenNode(\"child2\"))";
             Assert.AreEqual(expected, result, "Describe with two children method doesn't work properly");
@@ -53,11 +56,11 @@ namespace NodesAppTests
             var result = implementation.Describe(testData);
             string expected = "new ManyChildrenNode(\"manychildren\","
                 + Environment.NewLine
-                + "    new NoChildrenNode(\"child1\")"
+                + "    new NoChildrenNode(\"child1\"),"
                 + Environment.NewLine
-                + "    new NoChildrenNode(\"child2\")"
+                + "    new NoChildrenNode(\"child2\"),"
                 + Environment.NewLine
-                + "    new NoChildrenNode(\"child3\")"
+                + "    new NoChildrenNode(\"child3\"),"
                 + Environment.NewLine
                 + "    new NoChildrenNode(\"child4\"))";
             Assert.AreEqual(expected, result, "Describe with many children method doesn't work properly");
