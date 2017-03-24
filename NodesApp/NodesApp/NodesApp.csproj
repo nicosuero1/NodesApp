@@ -56,6 +56,7 @@
     <Compile Include="NodeOperations\INodeDescriber.cs" />
     <Compile Include="NodeOperations\INodeTransformer.cs" />
     <Compile Include="NodeOperations\INodeWriter.cs" />
+    <Compile Include="NodeOperations\Transformer.cs" />
     <Compile Include="NodeTypes\ManyChildrenNode.cs" />
     <Compile Include="NodeTypes\NoChildrenNode.cs" />
     <Compile Include="Node.cs" />

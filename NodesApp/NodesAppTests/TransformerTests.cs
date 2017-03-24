@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NodesApp.NodeOperations;
 using NodesApp.NodeTypes;
@@ -86,6 +86,26 @@ namespace NodesAppTests
             Assert.AreEqual(expected.Name, result.Name, "Many Children Node with 2 child not transformed correctly (Name property)");
             Assert.AreEqual(expected.FirstChild, ((TwoChildrenNode)result).FirstChild, "Many Children Node with 2 child not transformed correctly (First child)");
             Assert.AreEqual(expected.SecondChild, ((TwoChildrenNode)result).SecondChild, "Many Children Node with 2 child not transformed correctly (Second child)");
+        }
+
+        public void TransformManyChildrenNode_ManyChildren()
+        {
+            INodeTransformer implementation = new Transformer();
+            NoChildrenNode child1 = new NoChildrenNode("child1");
+            NoChildrenNode child2 = new NoChildrenNode("child2");
+            NoChildrenNode child3 = new NoChildrenNode("child3");
+            var testData = new ManyChildrenNode("root", child1
+                                                      , child2
+                                                      , child3
+                                                      , null
+                                                      , null);
+            var result = implementation.Transform(testData);
+            ManyChildrenNode expected = new ManyChildrenNode("root", child1
+                                                                   , child2
+                                                                   , child3);
+            Assert.AreEqual(expected.GetType(), result.GetType(), "Many Children Node with 2 child not transformed correctly (type)");
+            Assert.AreEqual(expected.Name, result.Name, "Many Children Node with 2 child not transformed correctly (Name property)");
+            Assert.AreEqual(expected.Children.Count(), ((ManyChildrenNode)result).Children.Count());
         }
         [TestMethod]
         public void NestedTranformer()
