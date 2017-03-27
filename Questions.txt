@@ -1,0 +1,15 @@
+Q: Will we have differents implementation for the interfaces INodeDescriber, INodeTransformer, INodeWriter?
+ - I assume that we will possibly have different implementation. That's why I created a different class for each operation.
+ - If the implementation of the different interfaces will not change (normally) then I would evauluate to have all the implementations in the same class
+
+Q: Will we have a lot of different and heavy integration test?
+ - I assume that we have a few integration test. I created the integration test and unit tests in the same project. If we have many integration test and heavy to run I would prefer to separate the integration test in other project in the same solution.
+
+Q: Does it worth to have NoChildrenNode, SingleChildNode and TwoChildrenNode when they are possibly a specific implementation of ManyChildrenNode?
+ NoChildrenNode = ManyChildrenNode (NoChilds)
+ SingleChildNode = ManyChildrenNode (1 Child)
+TwoChildrenNode = ManyChildrenNode (2 Childs)
+- I assume that it important because is part of the definition of the problem
+
+Q: In Castle.Windsor (IoC Container) we can install the components to be created by xml file or by using the Fluent Registration API. Which option will adaptate better to this specific project ? (it will depend on software development process, testing team)
+- I assume that is better for the team to keep the object (component) creation in a separated file called "windsorconfig.xml"
