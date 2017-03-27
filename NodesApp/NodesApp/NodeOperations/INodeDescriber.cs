@@ -1,4 +1,5 @@
-﻿namespace NodesApp.NodeOperations
+﻿
+namespace NodesApp.NodeOperations
 {
     public interface INodeDescriber
     {

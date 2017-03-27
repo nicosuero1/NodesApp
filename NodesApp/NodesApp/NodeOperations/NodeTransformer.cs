@@ -1,11 +1,16 @@
 ﻿using NodesApp.NodeTypes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace NodesApp.NodeOperations
 {
-    public class Transformer : INodeTransformer
+    /// <summary>
+    /// Implement the INodeTransformer to correct node trees
+    /// </summary>
+    public class NodeTransformer : INodeTransformer
     {
+        // Transform specific node tree into a new node tree with correct node type based in its properties
         public Node Transform(Node node)
         {
             string type = node.GetType().Name.ToString();
@@ -15,7 +20,7 @@ namespace NodesApp.NodeOperations
                 case "SingleChildNode": return TransformSingleChildNode(node as SingleChildNode);
                 case "TwoChildrenNode": return TransformTwoChildrenNode(node as TwoChildrenNode);
                 case "ManyChildrenNode": return TransformManyChildrenNode(node as ManyChildrenNode);
-                default: return null;
+                default: throw new Exception("Node type not suported");
             }
         }
 

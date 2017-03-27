@@ -1,0 +1,18 @@
+﻿<configuration>
+    <components>
+
+      <component id="NodesApp.NodeOperations.INodeWriter"
+                 service="NodesApp.NodeOperations.INodeWriter, NodesApp"
+                 type="NodesApp.NodeOperations.NodeWriter, NodesApp" 
+                 lifestyle="transient"/>
+      <component id="NodesApp.NodeOperations.INodeDescriber"
+                 service="NodesApp.NodeOperations.INodeDescriber, NodesApp"
+                 type="NodesApp.NodeOperations.NodeDescriber, NodesApp" 
+                 lifestyle="transient"/>
+      <component id="NodesApp.NodeOperations.INodeTransformer"
+                 service="NodesApp.NodeOperations.INodeTransformer, NodesApp"
+                 type="NodesApp.NodeOperations.NodeTransformer, NodesApp"
+                 lifestyle="transient"/>
+
+    </components>
+</configuration>

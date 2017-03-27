@@ -52,11 +52,12 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="NodeOperations\Describer.cs" />
+    <Compile Include="NodeOperations\NodeDescriber.cs" />
     <Compile Include="NodeOperations\INodeDescriber.cs" />
     <Compile Include="NodeOperations\INodeTransformer.cs" />
     <Compile Include="NodeOperations\INodeWriter.cs" />
-    <Compile Include="NodeOperations\Transformer.cs" />
+    <Compile Include="NodeOperations\NodeWriter.cs" />
+    <Compile Include="NodeOperations\NodeTransformer.cs" />
     <Compile Include="NodeTypes\ManyChildrenNode.cs" />
     <Compile Include="NodeTypes\NoChildrenNode.cs" />
     <Compile Include="Node.cs" />

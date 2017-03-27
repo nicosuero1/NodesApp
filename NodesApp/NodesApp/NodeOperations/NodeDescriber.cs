@@ -8,8 +8,9 @@ namespace NodesApp.NodeOperations
     /// <summary>
     /// Implements Description of each type of node
     /// </summary>
-    public class Describer : INodeDescriber
+    public class NodeDescriber : INodeDescriber
     {
+        // Returns a description of how to create the tree of node in C#
         public string Describe(Node node)
         {
             string type = node.GetType().Name.ToString();
@@ -19,7 +20,7 @@ namespace NodesApp.NodeOperations
                 case "SingleChildNode": return DescribeSingleChildNode(node as SingleChildNode);
                 case "TwoChildrenNode": return DescribeTwoChildrenNode(node as TwoChildrenNode);
                 case "ManyChildrenNode": return DescribeManyChildrenNode(node as ManyChildrenNode);
-                default: return "Node type not supported";
+                default: throw new Exception("Node type not suported");
             }
         }
 

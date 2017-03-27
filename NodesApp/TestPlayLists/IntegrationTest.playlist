@@ -1,0 +1,1 @@
+<Playlist Version="1.0"><Add Test="NodesAppTests.WriterTests.Writer_Task_FileContent_ComplexNode" /><Add Test="NodesAppTests.WriterTests.Writer_ReturnTaskNoNull" /><Add Test="NodesAppTests.WriterTests.Writer_Task_FileContent_NoChild" /><Add Test="NodesAppTests.WriterTests.Writer_Task_FileExits" /></Playlist>

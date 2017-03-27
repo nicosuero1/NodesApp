@@ -5,7 +5,7 @@ using System.Text;
 namespace NodesApp.Helpers
 {
     /// <summary>
-    /// Helper to manage strings in the application
+    /// Helper that manages strings in the application
     /// </summary>
     public static class StringHelper
     {
@@ -25,6 +25,12 @@ namespace NodesApp.Helpers
             }
             return sb.ToString();
         }
+
+        /// <summary>
+        /// Add 4 spaces of identation to the text
+        /// </summary>
+        /// <param name="text">Text to be idented</param>
+        /// <returns></returns>
         public static string AddIdentation4(string text)
         {
             return AddIdentation(text, 4, ' ');

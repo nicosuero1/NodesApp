@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Castle.Windsor;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NodesApp.NodeOperations;
 using NodesApp.NodeTypes;
 using System;
@@ -11,33 +12,63 @@ namespace NodesAppTests
     [TestClass]
     public class DescriberTests
     {
+        private static IWindsorContainer container;
+        private static INodeDescriber describer;
+
+        #region Class Initialize-Cleanup
+        [ClassInitialize()]
+        public static void MyClassInitialize(TestContext testContext)
+        {
+            // Create windsor container
+            container = new WindsorContainer("windsorconfig.xml");
+
+            // Create Resolve instance INodeDescriber
+            describer = container.Resolve<INodeDescriber>();
+        }
+        [ClassCleanup()]
+        public static void MyClassCleanup()
+        {
+            container.Dispose();
+        }
+        #endregion
+
+        #region TestMethods
+
+        /// <summary>
+        /// Tests if a NoChildrenNode is described correctly by the INodeDescriber
+        /// </summary>
         [TestMethod]
         public void DescribeNoChildrenNode()
         {
-            INodeDescriber implementation = new Describer();
             var testData = new NoChildrenNode("nochildren");
-            var result = implementation.Describe(testData);
+            var result = describer.Describe(testData);
             string expected = "new NoChildrenNode(\"nochildren\")";
             Assert.AreEqual(expected, result, "Describe with no children method doesn't work properly");
         }
+
+        /// <summary>
+        /// Tests if a SingleChildNode is described correctly by the INodeDescriber
+        /// </summary>
         [TestMethod]
         public void DescribeSingleChildNode()
         {
-            INodeDescriber implementation = new Describer();
             var testData = new SingleChildNode("singlechild", new NoChildrenNode("child"));
-            var result = implementation.Describe(testData);
+            var result = describer.Describe(testData);
             string expected = "new SingleChildNode(\"singlechild\","
                 + Environment.NewLine
                 + "    new NoChildrenNode(\"child\"))";
             Assert.AreEqual(expected, result, "Describe with single children method doesn't work properly");
         }
+        
+        /// <summary>
+        /// Tests if a TwoChildrenNode is described correctly by the INodeDescriber
+        /// </summary>
         [TestMethod]
         public void DescribeTwoChildrenNode()
         {
-            INodeDescriber implementation = new Describer();
             var testData = new TwoChildrenNode("twochildren", new NoChildrenNode("child1")
                                                             , new NoChildrenNode("child2"));
-            var result = implementation.Describe(testData);
+            var result = describer.Describe(testData);
             string expected = "new TwoChildrenNode(\"twochildren\","
                 + Environment.NewLine
                 + "    new NoChildrenNode(\"child1\"),"
@@ -45,15 +76,18 @@ namespace NodesAppTests
                 + "    new NoChildrenNode(\"child2\"))";
             Assert.AreEqual(expected, result, "Describe with two children method doesn't work properly");
         }
+
+        /// <summary>
+        /// Tests if a ManyChildrenNode is described correctly by the INodeDescriber
+        /// </summary>
         [TestMethod]
         public void DescribeManyChildrenNode()
         {
-            INodeDescriber implementation = new Describer();
             var testData = new ManyChildrenNode("manychildren", new NoChildrenNode("child1")
                                                                 , new NoChildrenNode("child2")
                                                                 , new NoChildrenNode("child3")
                                                                 , new NoChildrenNode("child4"));
-            var result = implementation.Describe(testData);
+            var result = describer.Describe(testData);
             string expected = "new ManyChildrenNode(\"manychildren\","
                 + Environment.NewLine
                 + "    new NoChildrenNode(\"child1\"),"
@@ -65,16 +99,19 @@ namespace NodesAppTests
                 + "    new NoChildrenNode(\"child4\"))";
             Assert.AreEqual(expected, result, "Describe with many children method doesn't work properly");
         }
+
+        /// <summary>
+        /// Tests if a Complex and Nested Node is described correctly by the INodeDescriber
+        /// </summary>
         [TestMethod]
         public void DescribeNested()
         {
-            INodeDescriber implementation = new Describer();
             var testData = new SingleChildNode("root",
                                 new TwoChildrenNode("child1",
                                     new NoChildrenNode("leaf1"),
                                     new SingleChildNode("child2",
                                         new NoChildrenNode("leaf2"))));
-            var result = implementation.Describe(testData);
+            var result = describer.Describe(testData);
 
             string expected = "new SingleChildNode(\"root\","
                 + Environment.NewLine
@@ -88,5 +125,7 @@ namespace NodesAppTests
 
             Assert.AreEqual(expected, result, "Describe method not working properly");
         }
+        #endregion
+        
     }
 }
